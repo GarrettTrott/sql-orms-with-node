@@ -15,15 +15,20 @@ Movie.init({
 // async IIFE
 (async () => {
   // Sync all tables
-  await sequelize.sync({ force:true})
+  await sequelize.sync({ force:true })
 
   try {
-    // await sequelize.authenticate();
-    // console.log('Connection to database successful')
+    // Instance of Movie class represents a database row
+    const movie = await Movie.create({
+        title: 'Fight Club',
+    });
+    console.log(movie.toJSON());
+
 
   } catch (error) {
     console.log('Error Connecting to database', error)
   }
+
 })();
 
 
