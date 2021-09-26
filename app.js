@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'movies.db'
+  storage: 'movies.db',
+  logging: false
 });
 
 // Movie Model
@@ -18,11 +19,18 @@ Movie.init({
   await sequelize.sync({ force:true })
 
   try {
+
     // Instance of Movie class represents a database row
     const movie = await Movie.create({
         title: 'Fight Club',
     });
     console.log(movie.toJSON());
+    // additional movie 
+    const movie2 = await Movie.create({
+      title: 'The Big Lebowski',
+    });
+    console.log(movie2.toJSON());
+
 
 
   } catch (error) {
