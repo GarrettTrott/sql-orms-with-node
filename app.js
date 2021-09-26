@@ -19,20 +19,19 @@ Movie.init({
   await sequelize.sync({ force:true })
 
   try {
-
+    const movieInstances = await Promise.all([
     // Instance of Movie class represents a database row
-    const movie = await Movie.create({
+      Movie.create({
         title: 'Fight Club',
-    });
-    console.log(movie.toJSON());
-    // additional movie 
-    const movie2 = await Movie.create({
+      }),
+      Movie.create({
       title: 'The Big Lebowski',
-    });
-    console.log(movie2.toJSON());
+      }),
+    ]);
 
-
-
+  const moviesJSON = movieInstances.map(movie => movie.toJSON());
+  console.log(moviesJSON)
+  
   } catch (error) {
     console.log('Error Connecting to database', error)
   }
