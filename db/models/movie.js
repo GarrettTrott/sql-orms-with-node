@@ -52,7 +52,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: false,
     },
-  }, { sequelize });
+  }, { timestamps: false ,
+       freezeTableName: true, 
+      sequelize 
+  });
 
   return Movie;
 }
