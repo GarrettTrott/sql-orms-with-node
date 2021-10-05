@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize')
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   class Movie extends Sequelize.Model {}
   Movie.init({
     id: {
       type: DataTypes.UUID,
-      DataTypes.UUIDV1,
+      defaultValue: DataTypes.UUIDV1,
       primaryKey: true,
     },
     title: {
