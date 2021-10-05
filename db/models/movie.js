@@ -52,8 +52,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: false,
     },
-  }, { timestamps: false ,
-       freezeTableName: true, 
+  }, {
+       freezeTableName: true,
+       paranoid: true, // enable "soft" deletes. paranoid option to true means that a destroyed record will not be physically deleted from the database, but it will also not be returned in future queries.
       sequelize 
   });
 
