@@ -38,6 +38,27 @@ const {Movie, Person} = db.models;
     await movie3.save(); // save the table
     console.log(movie3.toJSON());
 
+    // ** READ or 'Retrieve records' ** //
+
+    // Retrieve a record by Primary key (ID) : findByPk
+    const movieById = await Movie.findByPk(3); 
+    console.log(movieById.toJSON());
+
+    // Retrieve the first record with a specific parameter : findOne
+    const movieByRuntime = await Movie.findOne({ where: { runtime: 137 } });
+    console.log(movieByRuntime.toJSON());
+
+    // The findAll method retrieves a collection of all records, instead of a single record
+    const movies = await Movie.findAll();
+    console.log( movies.map(movie => movie.toJSON()) );
+
+    // Filter with findAll{{
+    const moviesOnVHS = await Movie.findAll({
+      where: {
+        isAvailableOnVHS: true
+      }
+    });
+    console.log( moviesOnVHS.map(movieOnVHS => movieOnVHS.toJSON()) );
 
   } catch (error) {
     if (error.name === 'SequelizeValidationError') { // Generate organized Errors
